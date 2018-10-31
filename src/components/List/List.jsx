@@ -1,12 +1,23 @@
 import React from 'react';
+import { connect } from "react-redux";
 
 import './List.css'
 
-const List = (props) => {
-    return (
-        <div className='List'>
+const mapStateToProps = state => {
+  return { articles: state.articles };
+};
 
-        </div>
-    )
-}
-export default List
+
+const ConnectedList = ({ articles }) => (
+  <ul className="list-group list-group-flush">
+    {articles.map(el => (
+      <li className="list-group-item" key={el.id}>
+        {el.title}
+      </li>
+    ))}
+  </ul>
+);
+
+const List = connect(mapStateToProps)(ConnectedList);
+
+export default List;
